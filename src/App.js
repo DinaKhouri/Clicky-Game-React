@@ -11,16 +11,38 @@ class App extends Component {
     score:0,
     topScore:0
   };
-  // CorrectGuess = newData => {
-  //   this.setState({
-  //     data: this.ShuffleFriend(newData),
-  //   });
-  // };
-  ShuffleFriend=friends =>{
+  IncorrectGuess = friends => {
+    this.setState({
+      score: 0
+    });
+  };
+  correctGuess = friends => {
+    const {topScore, score } = this.state;
+      const newScore = score + 1;
+      const newTopScore = Math.max(newScore, topScore);
+    this.setState({
+      score:newScore,
+      topScore:newTopScore
+    });
+  };
+  handleClick= (friends)=>{
+    console.log("handleclick");
+    this.setState({
+      friends: this.ShuffleFriend(friends),
+      score:newScore,
+      topScore:newTopScore
+    });
+    
+  }
+  ShuffleFriend=(friends) =>{
     console.log("shuffling")
-    for (let i = friends.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [friends[i], friends[j]] = [friends[j], friends[i]];
+    let i = friends.length - 1;
+    while (i > 0) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = friends[i];
+      friends[i] = friends[j];
+      friends[j] = temp;
+      i--;
     }
     return friends;
 }
@@ -35,7 +57,7 @@ class App extends Component {
       <Wrapper>
         {this.state.friends.map(friend => (
           <FriendCard
-            ShuffleFriend={this.ShuffleFriend}
+          handleClick={this.handleClick}
             id={friend.id}
             key={friend.id}
             image={friend.image}
