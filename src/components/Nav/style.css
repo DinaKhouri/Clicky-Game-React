@@ -1,0 +1,26 @@
+.navbar {
+  background: #f0600d;
+  height: 100px;;
+  min-height: 70px;
+  position: fixed;
+  width: 100%;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  color: white;
+  font-size: calc(10px + (24 - 10) * (100vw - 320px) / (1200 - 400));
+  z-index: 99;
+  white-space: nowrap;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  display: inline-block;
+  
+  width: 33.3%;
+  text-align: center;
+}
+
+

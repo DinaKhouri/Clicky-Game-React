@@ -1,35 +1,48 @@
 import React, { Component } from "react";
 import FriendCard from "./components/FriendCard";
+import Nav from "./components/Nav";
 import Wrapper from "./components/Wrapper";
 import friends from "./friends.json";
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
-    friends
+    friends,
+    score:0,
+    topScore:0
   };
-
-  removeFriend = id => {
-    // Filter this.state.friends for friends with an id not equal to the id being removed
-    const friends = this.state.friends.filter(friend => friend.id !== id);
-    // Set this.state.friends equal to the new friends array
-    this.setState({ friends });
-  };
+  // CorrectGuess = newData => {
+  //   this.setState({
+  //     data: this.ShuffleFriend(newData),
+  //   });
+  // };
+  ShuffleFriend=friends =>{
+    console.log("shuffling")
+    for (let i = friends.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [friends[i], friends[j]] = [friends[j], friends[i]];
+    }
+    return friends;
+}
+  
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
+      <div>
+      <Nav 
+      score={this.state.score} topScore={this.state.topScore} />
       <Wrapper>
-        
         {this.state.friends.map(friend => (
           <FriendCard
-            removeFriend={this.removeFriend}
+            ShuffleFriend={this.ShuffleFriend}
             id={friend.id}
             key={friend.id}
             image={friend.image}
           />
         ))}
       </Wrapper>
+      </div>
     );
   }
 }
