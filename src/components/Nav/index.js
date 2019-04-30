@@ -11,7 +11,7 @@ function Nav(props) {
           <h6 >Clicky Game</h6>
         </li>
         <li>
-          Score: {props.score} | Top Score: {props.topScore}
+        {props.messege} | Score: {props.currentScore} | Top Score: {props.topScore}
         </li>
       </ul>
     </nav>
